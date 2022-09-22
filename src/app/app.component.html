@@ -1,0 +1,50 @@
+<style>
+ 
+  h1
+  {
+    background-color: blue;
+    color: red;
+    text-align: center;
+  }
+  .container
+  {
+    border: 2px solid black;
+    padding: 15px;
+    text-align: center;
+    background-color: aqua;
+  }
+</style>
+<a href=".container"><h2>{{loginPage}}</h2></a>
+<h1>{{msg}}</h1>
+<div class="container" [style.visibility]="m">
+    <form #contactForm="ngForm" novalidate (ngSubmit)="submit(contactForm.value)">
+       
+       
+         
+        <div class="form-group">
+            <label for="Email">Email Id</label>
+            <input required ngModel name="Email" type="text" #Email="ngModel" class="form-control" id="Email">
+            <div class="alert alert-danger" *ngIf="Email.touched && !Email.valid">
+                Email is required.
+            </div>
+        </div><br>
+        <div class="form-group">
+          <label for="Password">Password</label>
+          <input required minlength="3" maxlength="10" ngModel name="Password" type="password" #Password="ngModel" class="form-control" id="Password">
+          <div class="alert alert-danger" *ngIf="Password.touched && !Password.valid">
+              <div *ngIf="Password.errors?.required">Password  is required.</div>
+              <div *ngIf="Password.errors?.minlength">Password is minimum {{ Password.errors?.minlength.requiredLength }} character.</div>
+              <div *ngIf="Password.errors?.maxlength">Passwordis maximum 10 character.</div>
+          </div>
+      </div><br>
+      
+          
+      <button class="btn btn-primary" type="submit" [class.disabled]="!contactForm.valid" > {{buttonTitle}}</button>
+        
+      </form>
+      </div>
+      
+     
+
+
+      <router-outlet *ngIf="visible"></router-outlet> 
